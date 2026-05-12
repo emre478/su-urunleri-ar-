@@ -18,6 +18,8 @@ const startBtn = document.getElementById("startBtn");
 
 const startScreen = document.getElementById("startScreen");
 
+let currentTarget = null;
+
 /* BALIK DATASI */
 
 const fishData = {
@@ -68,8 +70,9 @@ startBtn.addEventListener("click", () => {
 
 closeBtn.addEventListener("click", () => {
 	popup.classList.add("hidden");
-});
 
+	currentTarget = null;
+});
 /* TARGET EVENTS */
 
 window.addEventListener("load", () => {
@@ -77,8 +80,11 @@ window.addEventListener("load", () => {
 
 	targets.forEach((target, index) => {
 		/* TARGET FOUND */
-
 		target.addEventListener("targetFound", () => {
+			if (currentTarget === index) return;
+
+			currentTarget = index;
+
 			console.log("TARGET FOUND:", index);
 
 			const fish = fishData[index];
@@ -96,16 +102,6 @@ window.addEventListener("load", () => {
 			fishHabitat.innerText = fish.habitat;
 
 			popup.classList.remove("hidden");
-		});
-
-		/* TARGET LOST */
-
-		target.addEventListener("targetLost", () => {
-			console.log("TARGET LOST:", index);
-
-			setTimeout(() => {
-				popup.classList.add("hidden");
-			}, 500);
 		});
 	});
 });
