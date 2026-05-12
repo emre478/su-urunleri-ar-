@@ -5,7 +5,10 @@
 
   <meta charset="UTF-8" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+  />
 
   <title>Su Ürünleri AR</title>
 
@@ -49,7 +52,11 @@
 
     <div class="popup-card">
 
-      <img id="fishImage" src="" alt="" />
+      <img
+        id="fishImage"
+        src=""
+        alt=""
+      />
 
       <h2 id="fishName"></h2>
 
@@ -81,28 +88,48 @@
 
   <!-- AR SCENE -->
 
-  <a-scene mindar-image="
-    imageTargetSrc: ./assets/targets/targets.mind;
-    uiScanning: true;
-    uiLoading: true;
-    filterMinCF: 0.0001;
-    filterBeta: 0.001;
-  " color-space="sRGB" renderer="
-    colorManagement: true;
-    physicallyCorrectLights: true;
-    antialias: true;
-  " vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false" embedded>
+  <a-scene
+
+    mindar-image="
+      imageTargetSrc: ./assets/targets/targets.mind;
+      uiScanning: yes;
+      uiLoading: yes;
+    "
+
+    color-space="sRGB"
+
+    renderer="
+      colorManagement: true;
+      physicallyCorrectLights: true;
+    "
+
+    vr-mode-ui="enabled: false"
+
+    device-orientation-permission-ui="enabled: false"
+
+  >
 
     <!-- CAMERA -->
 
-    <a-camera position="0 0 0" look-controls="enabled: false">
+    <a-camera
+      position="0 0 0"
+      look-controls="enabled: false"
+    >
     </a-camera>
 
     <!-- TARGET 0 -->
 
     <a-entity mindar-image-target="targetIndex: 0">
 
-      <a-box position="0 0 0" color="#0077ff" depth="0.5" height="0.5" width="0.5">
+      <a-box
+
+        position="0 0 0"
+
+        scale="0.3 0.3 0.3"
+
+        color="#0077ff"
+
+      >
       </a-box>
 
     </a-entity>
@@ -111,7 +138,15 @@
 
     <a-entity mindar-image-target="targetIndex: 1">
 
-      <a-box position="0 0 0" color="#ff0000" depth="0.5" height="0.5" width="0.5">
+      <a-box
+
+        position="0 0 0"
+
+        scale="0.3 0.3 0.3"
+
+        color="#ff0000"
+
+      >
       </a-box>
 
     </a-entity>
@@ -120,7 +155,15 @@
 
     <a-entity mindar-image-target="targetIndex: 2">
 
-      <a-box position="0 0 0" color="#00aa00" depth="0.5" height="0.5" width="0.5">
+      <a-box
+
+        position="0 0 0"
+
+        scale="0.3 0.3 0.3"
+
+        color="#00aa00"
+
+      >
       </a-box>
 
     </a-entity>
