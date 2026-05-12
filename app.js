@@ -1,4 +1,4 @@
-/* ELEMENTS */
+/* ELEMENTLER */
 
 const popup = document.getElementById("fishPopup");
 
@@ -18,70 +18,37 @@ const startBtn = document.getElementById("startBtn");
 
 const startScreen = document.getElementById("startScreen");
 
-/* FISH DATA */
+/* BALIK DATASI */
 
 const fishData = {
 
   0: {
-
     name: "Levrek",
-
     desc: "Levrek Ege Denizi’nde yaşayan etçil bir balıktır.",
-
     habitat: "Ege Denizi",
-
     size: "40 cm",
-
     image: "./assets/images/levrek.jpg"
   },
 
   1: {
-
     name: "Somon",
-
     desc: "Somon göç eden güçlü bir balık türüdür.",
-
     habitat: "Kuzey Atlantik",
-
     size: "70 cm",
-
     image: "./assets/images/somon.jpg"
   },
 
   2: {
-
     name: "Palyaço Balığı",
-
     desc: "Mercan resiflerinde yaşayan tropikal balıktır.",
-
     habitat: "Pasifik Okyanusu",
-
     size: "15 cm",
-
     image: "./assets/images/clownfish.jpg"
   }
 
 };
 
-/* SCENE */
-
-const sceneEl = document.querySelector("a-scene");
-
-/* MINDAR SYSTEM */
-
-const mindarSystem = sceneEl.systems["mindar-image-system"];
-
-/* START BUTTON */
-
-startBtn.addEventListener("click", async () => {
-
-  startScreen.style.display = "none";
-
-  await mindarSystem.start();
-
-});
-
-/* CLOSE POPUP */
+/* POPUP KAPAT */
 
 closeBtn.addEventListener("click", () => {
 
@@ -89,15 +56,49 @@ closeBtn.addEventListener("click", () => {
 
 });
 
-/* DOM LOADED */
+/* SAYFA YÜKLENDİĞİNDE */
 
-document.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("load", () => {
 
-  const targets = document.querySelectorAll("[mindar-image-target]");
+  const sceneEl = document.querySelector("a-scene");
+
+  /* START BUTTON */
+
+  startBtn.addEventListener("click", async () => {
+
+    try {
+
+      /* MINDAR SYSTEM */
+
+      const mindarSystem =
+        sceneEl.systems["mindar-image-system"];
+
+      /* KAMERAYI BAŞLAT */
+
+      await mindarSystem.start();
+
+      console.log("KAMERA BAŞLADI");
+
+      /* START SCREEN GİZLE */
+
+      startScreen.style.display = "none";
+
+    } catch (error) {
+
+      console.error("KAMERA HATASI:", error);
+
+      alert("Kamera başlatılamadı");
+
+    }
+
+  });
+
+  /* TARGETLER */
+
+  const targets =
+    document.querySelectorAll("[mindar-image-target]");
 
   targets.forEach((target, index) => {
-
-    /* TARGET FOUND */
 
     target.addEventListener("targetFound", () => {
 
@@ -121,11 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 
-    /* TARGET LOST */
-
     target.addEventListener("targetLost", () => {
-
-      console.log("TARGET LOST:", index);
 
       setTimeout(() => {
 
