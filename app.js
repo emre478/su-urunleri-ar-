@@ -21,114 +21,91 @@ const startScreen = document.getElementById("startScreen");
 /* BALIK DATASI */
 
 const fishData = {
+	0: {
+		name: "Levrek",
 
-  0: {
+		desc: "Levrek Ege Denizi’nde yaşayan etçil bir balıktır.",
 
-    name: "Levrek",
+		habitat: "Ege Denizi",
 
-    desc: "Levrek Ege Denizi’nde yaşayan etçil bir balıktır.",
+		size: "40 cm",
 
-    habitat: "Ege Denizi",
+		image: "./assets/images/levrek.jpg",
+	},
 
-    size: "40 cm",
+	1: {
+		name: "Palyaço Balığı",
 
-    image: "./assets/images/levrek.jpg"
+		desc: "Mercan resiflerinde yaşayan tropikal balıktır.",
 
-  },
+		habitat: "Pasifik Okyanusu",
 
-  1: {
+		size: "15 cm",
 
-    name: "Somon",
+		image: "./assets/images/palyaco.jpg",
+	},
 
-    desc: "Somon göç eden güçlü bir balık türüdür.",
+	2: {
+		name: "Somon",
 
-    habitat: "Kuzey Atlantik",
+		desc: "Somon göç eden güçlü bir balık türüdür.",
 
-    size: "70 cm",
+		habitat: "Kuzey Atlantik",
 
-    image: "./assets/images/somon.jpg"
+		size: "70 cm",
 
-  },
-
-  2: {
-
-    name: "Palyaço Balığı",
-
-    desc: "Mercan resiflerinde yaşayan tropikal balıktır.",
-
-    habitat: "Pasifik Okyanusu",
-
-    size: "15 cm",
-
-    image: "./assets/images/clownfish.jpg"
-
-  }
-
+		image: "./assets/images/somon.jpg",
+	},
 };
 
 /* START BUTTON */
 
 startBtn.addEventListener("click", () => {
-
-  startScreen.style.display = "none";
-
+	startScreen.style.display = "none";
 });
 
 /* CLOSE POPUP */
 
 closeBtn.addEventListener("click", () => {
-
-  popup.classList.add("hidden");
-
+	popup.classList.add("hidden");
 });
 
 /* TARGET EVENTS */
 
 window.addEventListener("load", () => {
+	const targets = document.querySelectorAll("[mindar-image-target]");
 
-  const targets =
-    document.querySelectorAll("[mindar-image-target]");
+	targets.forEach((target, index) => {
+		/* TARGET FOUND */
 
-  targets.forEach((target, index) => {
+		target.addEventListener("targetFound", () => {
+			console.log("TARGET FOUND:", index);
 
-    /* TARGET FOUND */
+			const fish = fishData[index];
 
-    target.addEventListener("targetFound", () => {
+			if (!fish) return;
 
-      console.log("TARGET FOUND:", index);
+			fishImage.src = fish.image;
 
-      const fish = fishData[index];
+			fishName.innerText = fish.name;
 
-      if (!fish) return;
+			fishDesc.innerText = fish.desc;
 
-      fishImage.src = fish.image;
+			fishSize.innerText = fish.size;
 
-      fishName.innerText = fish.name;
+			fishHabitat.innerText = fish.habitat;
 
-      fishDesc.innerText = fish.desc;
+			popup.classList.remove("hidden");
+		});
 
-      fishSize.innerText = fish.size;
+		/* TARGET LOST */
 
-      fishHabitat.innerText = fish.habitat;
+		target.addEventListener("targetLost", () => {
+			console.log("TARGET LOST:", index);
 
-      popup.classList.remove("hidden");
-
-    });
-
-    /* TARGET LOST */
-
-    target.addEventListener("targetLost", () => {
-
-      console.log("TARGET LOST:", index);
-
-      setTimeout(() => {
-
-        popup.classList.add("hidden");
-
-      }, 500);
-
-    });
-
-  });
-
+			setTimeout(() => {
+				popup.classList.add("hidden");
+			}, 500);
+		});
+	});
 });
