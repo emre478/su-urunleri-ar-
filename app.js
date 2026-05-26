@@ -124,7 +124,7 @@ const fishData = {
 /* ── START ── */
 startBtn.addEventListener("click", () => {
   startScreen.style.display = "none";
-  aiFloatBtn.classList.remove("hidden");
+  // aiFloatBtn.classList.remove("hidden"); // AI özelliği kapalı
 });
 
 /* ── BALIK POPUP KAPAT ── */
